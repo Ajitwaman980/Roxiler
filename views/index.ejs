@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transactions Dashboard</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container mt-5">
+    <h1 class="mb-4">Transactions Dashboard</h1>
+
+    <!-- Statistics Section -->
+    <div class="card mb-4">
+      <div class="card-header">
+        <h3>Statistics</h3>
+      </div>
+      <div class="card-body">
+        <p><strong>Total Sale Amount:</strong> $<%= combinedData.statistics.totalSaleAmount %>
+        </p>
+        <p><strong>Total Sold Items:</strong>
+          <%= combinedData.statistics.totalSoldItems %>
+        </p>
+        <p><strong>Total Not Sold Items:</strong>
+          <%= combinedData.statistics.totalNotSoldItems %>
+        </p>
+      </div>
+    </div>
+
+    <!-- Transactions Section -->
+    <div class="card mb-4">
+      <div class="card-header">
+        <h3>Transactions</h3>
+      </div>
+      <div class="card-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Title</th>
+              <th>Price</th>
+              <th>Description</th>
+              <th>Category</th>
+              <th>Sold</th>
+              <th>Date of Sale</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% combinedData.transactions.forEach(transaction=> { %>
+              <tr>
+                <td>
+                  <%= transaction.id %>
+                </td>
+                <td>
+                  <%= transaction.title %>
+                </td>
+                <td>$<%= transaction.price %>
+                </td>
+                <td>
+                  <%= transaction.description %>
+                </td>
+                <td>
+                  <%= transaction.category %>
+                </td>
+                <td>
+                  <%= transaction.sold ? 'Yes' : 'No' %>
+                </td>
+                <td>
+                  <%= transaction.dateOfSale %>
+                </td>
+              </tr>
+              <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Bar Chart Data Section -->
+    <div class="card mb-4">
+      <div class="card-header">
+        <h3>Bar Chart Data</h3>
+      </div>
+      <div class="card-body">
+        <ul>
+          <% combinedData.barChart.forEach(data=> { %>
+            <li><strong>
+                <%= data.range %>:
+              </strong>
+              <%= data.count %> items
+            </li>
+            <% }) %>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Pie Chart Data Section -->
+    <div class="card mb-4">
+      <div class="card-header">
+        <h3>Pie Chart Data</h3>
+      </div>
+      <div class="card-body">
+        <ul>
+          <% combinedData.pieChart.forEach(data=> { %>
+            <li><strong>
+                <%= data.category %>:
+              </strong>
+              <%= data.count %> items
+            </li>
+            <% }) %>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
